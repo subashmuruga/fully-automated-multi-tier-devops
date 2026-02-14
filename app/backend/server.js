@@ -8,50 +8,32 @@ app.use(express.json());
 
 // ---------------- MySQL Connection ----------------
 
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  port: 3306
 });
 
-connection.connect((err) => {
+db.connect((err) => {
   if (err) {
-    console.error("❌ Database connection failed:", err);
+    console.error("❌ Database connection failed:", err.message);
   } else {
-    console.log("✅ Connected to RDS MySQL!");
+    console.log("✅ Connected to RDS MySQL");
   }
 });
 
-// ---------------- Existing API ----------------
+// ---------------- API Route ----------------
 
 app.get("/api", (req, res) => {
   res.json({
-    message: "Backend API is running successfully 🚀",
+    message: "Backend API connected to RDS successfully 🚀",
     status: "Healthy"
   });
 });
 
-// ---------------- DB Test API ----------------
-
-app.get("/db-test", (req, res) => {
-  connection.query("SELECT NOW() AS time", (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({
-        error: "Database query failed"
-      });
-    }
-
-    res.json({
-      message: "Database connected successfully ✅",
-      server_time: results[0].time
-    });
-  });
-});
-
 const PORT = 5000;
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
