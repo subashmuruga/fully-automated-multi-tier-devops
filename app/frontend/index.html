@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multi-Tier DevOps App</title>
+</head>
+<body>
+  <h1> Fully Automated Multi-Tier DevOps App</h1>
+  <button onclick="getData()">Check Backend Status</button>
+  <p id="result"></p>
+
+  <script>
+    function getData() {
+      fetch("http://backend-service:5000/api")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("result").innerText = data.message;
+        });
+    }
+  </script>
+</body>
+</html>
