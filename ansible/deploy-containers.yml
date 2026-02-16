@@ -1,0 +1,34 @@
+---
+- name: Deploy Multi-Tier Containers
+  hosts: web
+  become: yes
+
+  tasks:
+
+    - name: Pull frontend image
+      docker_image:
+        name: 700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-frontend:latest
+        source: pull
+
+    - name: Pull backend image
+      docker_image:
+        name: 700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-backend:latest
+        source: pull
+
+    - name: Run backend container
+      docker_container:
+        name: backend
+        image: 700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-backend:latest
+        state: started
+        restart_policy: always
+        published_ports:
+          - "5000:5000"
+
+    - name: Run frontend container
+      docker_container:
+        name: frontend
+        image: 700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-frontend:latest
+        state: started
+        restart_policy: always
+        published_ports:
+          - "3000:80"
