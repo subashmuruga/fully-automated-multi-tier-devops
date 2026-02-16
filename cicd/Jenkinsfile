@@ -1,0 +1,71 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = "ap-south-1"
+        ECR_FRONTEND = "700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-frontend"
+        ECR_BACKEND  = "700558745882.dkr.ecr.ap-south-1.amazonaws.com/multi-tier-backend"
+        IMAGE_TAG = "latest"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/subashmuruga/fully-automated-multi-tier-devops.git'
+            }
+        }
+
+        stage('Build Backend Image') {
+            steps {
+                sh '''
+                docker build -t multi-tier-backend ./app/backend
+                docker tag multi-tier-backend:latest $ECR_BACKEND:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Build Frontend Image') {
+            steps {
+                sh '''
+                docker build -t multi-tier-frontend ./app/frontend
+                docker tag multi-tier-frontend:latest $ECR_FRONTEND:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Login to AWS ECR') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region $AWS_REGION | \
+                docker login --username AWS --password-stdin 700558745882.dkr.ecr.ap-south-1.amazonaws.com
+                '''
+            }
+        }
+
+        stage('Push Images to ECR') {
+            steps {
+                sh '''
+                docker push $ECR_BACKEND:$IMAGE_TAG
+                docker push $ECR_FRONTEND:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Deployment (Optional Future Step)') {
+            steps {
+                echo "Deployment stage can trigger Ansible or SSH deployment"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline executed successfully 🚀"
+        }
+        failure {
+            echo "Pipeline failed ❌"
+        }
+    }
+}
