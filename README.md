@@ -52,9 +52,7 @@ ________________________________________
 
 🖼️ Architecture Diagram
 
-________________________________________
-
-🧱 Project Modules
+![DevOps Architecture](architecture/aws-architecture%20(2).png)
 
 ________________________________________
 
@@ -273,9 +271,15 @@ ________________________________________
 
 📷 Screenshots
 
-🌐 Application Load Balancer
-🐳 Running Containers
-📊 Grafana Dashboard
+<p align="center">
+  <img src="screenshots/Screenshot%201.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%202.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%203.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%204.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%205.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%206.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%207.png" width="800">
+</p>
 
 ________________________________________
 
@@ -326,4 +330,5 @@ Subash M
 📧 mailtomsubash@gmail.com
 
 🔗 GitHub: https://github.com/subashmuruga
+
 
