@@ -278,7 +278,8 @@ ________________________________________
   <img src="screenshots/Screenshot%204.png" width="800"><br><br>
   <img src="screenshots/Screenshot%205.png" width="800"><br><br>
   <img src="screenshots/Screenshot%206.png" width="800"><br><br>
-  <img src="screenshots/Screenshot%207.png" width="800">
+  <img src="screenshots/Screenshot%207.png" width="800"><br><br>
+  <img src="screenshots/Screenshot%208.png" width="800">   
 </p>
 
 ________________________________________
@@ -330,5 +331,6 @@ Subash M
 📧 mailtomsubash@gmail.com
 
 🔗 GitHub: https://github.com/subashmuruga
+
 
 
